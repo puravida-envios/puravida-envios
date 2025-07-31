@@ -1,339 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pura Vida Envíos – Cotizador y Tracking</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pura Vida Envíos</title>
   <style>
-    :root{
-      --azul:#0033A0; --rojo:#CE1126; --blanco:#FFFFFF;
-      --gris:#f5f7fb; --texto:#1f2937; --suave:#6b7280; --borde:#e5e7eb;
-      --sombra:0 10px 25px rgba(0,0,0,.08); --radio:14px;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('fondo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--gris);color:var(--texto);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;line-height:1.5}
-    a{color:var(--azul);text-decoration:none}
-    header{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--azul),var(--rojo));color:#fff;box-shadow:var(--sombra)}
-    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px}
-    .brand-logo{width:40px;height:40px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--azul);font-weight:900}
-    .menu{display:flex;gap:18px;flex-wrap:wrap}
-    .menu a{color:#fff;opacity:.95}.menu a:hover{opacity:1;text-decoration:underline}
-    .flagbar{height:8px;background:linear-gradient(90deg,var(--azul) 33.33%, var(--blanco) 33.33% 66.66%, var(--rojo) 66.66%)}
-
-    /* HERO con opción de imagen de fondo (cámbiala cuando quieras) */
-    .hero{
-      background:
-        linear-gradient(180deg,rgba(255,255,255,.95),rgba(246,248,255,.95)),
-        url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
-      border-bottom:1px solid var(--borde);
+    header {
+      background-color: rgba(0, 51, 160, 0.9);
+      padding: 1rem;
+      text-align: center;
     }
-    .hero-in{display:grid;grid-template-columns:1.2fr 1fr;gap:30px;padding:40px 0}
-    .cta{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{background:var(--rojo);color:#fff;border:none;border-radius:14px;padding:12px 18px;font-weight:700;cursor:pointer;box-shadow:var(--sombra)}
-    .btn.alt{background:var(--azul)}
-    .card{background:#fff;border:1px solid var(--borde);border-radius:var(--radio);padding:18px;box-shadow:var(--sombra)}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .section{padding:36px 0}
-    .muted{color:var(--suave);font-size:14px}
-
-    /* Cotizador */
-    .quote{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
-    input,select{width:100%;padding:12px;border:1px solid var(--borde);border-radius:12px;background:#fff}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .result{background:linear-gradient(180deg,#ffffff, #f7fbff);border:1px solid var(--borde);border-radius:16px;padding:16px;box-shadow:var(--sombra)}
-    .price{font-size:36px;font-weight:900;color:var(--azul);margin:4px 0}
-
-    /* Testimonios */
-    .testi-box{border-left:6px solid var(--azul);background:#fff;border-radius:16px;padding:22px;box-shadow:var(--sombra)}
-    .testi-quote{font-size:20px;line-height:1.6;color:#111827;font-style:italic;margin:0}
-
-    footer{margin-top:40px;background:linear-gradient(90deg,var(--azul),var(--rojo));color:#fff}
-    .foot{display:grid;grid-template-columns:2fr 1fr;gap:20px;padding:24px 0}
-    @media(max-width:900px){.hero-in,.quote,.grid-3,.row{grid-template-columns:1fr}}
+    header img {
+      height: 70px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      margin-top: 2rem;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ff0000;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+    #resultado {
+      margin-top: 1.5rem;
+    }
+    .historial-item {
+      margin-left: 1rem;
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="wrap nav">
-      <div class="brand"><div class="brand-logo">PV</div>Pura Vida Envíos</div>
-      <nav class="menu">
-        <a href="#inicio">Inicio</a>
-        <a href="#cotizador">Cotizador</a>
-        <a href="#seguimiento">Seguimiento</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#testimonios">Testimonios</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-    </div>
-    <div class="flagbar"></div>
+    <img src="Logo%202.jpeg" alt="Logo Pura Vida Envíos">
+    <h1>Pura Vida Envíos</h1>
   </header>
 
-  <main id="inicio" class="hero">
-    <div class="wrap hero-in">
-      <div>
-        <h1>Pura Vida Envíos</h1>
-        <p>Tus compras internacionales llegan rápido y seguro a Costa Rica. Cotiza al instante y rastrea tus paquetes en línea.</p>
-        <div class="cta">
-          <a href="#cotizador" class="btn">Cotiza tu envío</a>
-          <a href="#seguimiento" class="btn alt">Rastrea tu paquete</a>
-        </div>
-        <p class="muted" style="margin-top:10px">
-          Nota: Artículos peligrosos como <strong>sprays</strong> o <strong>envases al vacío</strong> NO VUELAN por seguridad.
-        </p>
-      </div>
-      <div class="card">
-        <h3 style="margin-top:0">Beneficios</h3>
-        <ul>
-          <li>Servicio confiable desde EE.UU., Europa, Asia y Colombia.</li>
-          <li>Precios claros. <strong>Consolidamos tus paquetes desde 1 lb.</strong></li>
-          <li>Atención cercana y personalizada. Pura vida.</li>
-        </ul>
-      </div>
-    </div>
-  </main>
-
-  <!-- Cotizador -->
-  <section id="cotizador" class="section">
-    <div class="wrap">
-      <h2>Cotizador</h2>
-      <div class="quote">
-        <div class="card">
-          <div class="row">
-            <label>Origen
-              <select id="origen">
-                <option value="usa">EE.UU./Europa/Asia</option>
-                <option value="colombia">Colombia</option>
-              </select>
-            </label>
-            <label>Tipo de envío
-              <div>
-                <label style="margin-right:10px"><input type="radio" name="tipo" value="aereo" checked> Aéreo</label>
-                <label><input type="radio" name="tipo" value="maritimo"> Marítimo</label>
-              </div>
-            </label>
-          </div>
-
-          <!-- Peso -->
-          <div id="peso-block">
-            <label>Peso</label>
-            <div class="row">
-              <input id="peso" type="number" min="0.01" step="0.01" placeholder="Ej: 5.5">
-              <select id="unidad">
-                <option value="lb">lb</option>
-                <option value="kg">kg</option>
-              </select>
-            </div>
-            <div class="muted" id="peso-convert"></div>
-          </div>
-
-          <!-- Dimensiones marítimo -->
-          <div id="dim-block" style="display:none;margin-top:12px">
-            <label>Dimensiones (solo marítimo)</label>
-            <div class="row3">
-              <input id="largo" type="number" min="0.1" step="0.1" placeholder="Largo">
-              <input id="ancho" type="number" min="0.1" step="0.1" placeholder="Ancho">
-              <input id="alto" type="number" min="0.1" step="0.1" placeholder="Alto">
-            </div>
-            <div style="margin-top:8px">
-              <label style="margin-right:10px"><input type="radio" name="udim" value="cm" checked> cm</label>
-              <label><input type="radio" name="udim" value="in"> pulgadas</label>
-            </div>
-          </div>
-
-          <div class="card" style="margin-top:12px;background:#fff4f4;border:1px dashed #f3b0b0">
-            <strong>Importante:</strong> Colombia: solo <u>aéreo</u> a <strong>$16/kg</strong>.  
-            EE.UU./Europa/Asia: Aéreo <strong>$7.5/lb</strong> (min 1 lb). Marítimo <strong>$25/ft³</strong>.
-          </div>
-        </div>
-
-        <div class="result">
-          <div class="muted">Resultado estimado</div>
-          <div id="precio" class="price">$0.00</div>
-          <div id="detalle" class="muted"></div>
-
-          <!-- Mensaje de consolidación: solo USA/Europa/Asia aéreo -->
-          <div id="consolidacion" style="display:none; margin-top:8px;">
-            <p style="color:#0033A0;font-weight:700;margin:6px 0;font-size:16px;">
-              ¡Consolidamos tus paquetes a partir de 1 libra!
-            </p>
-            <p class="muted">El mínimo a cobrar es 1 libra en envíos desde EE.UU., Europa y Asia. Sumamos todos tus paquetes para que pagues lo justo.</p>
-          </div>
-
-          <div class="muted" style="margin-top:6px">
-            Los montos mostrados son estimados. Pueden variar por revisión, seguros u otros factores.
-          </div>
-          <button id="btn-whatsapp" class="btn" style="margin-top:12px">Solicitar cotización por WhatsApp</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tracking -->
-  <section id="seguimiento" class="section">
-    <div class="wrap card">
-      <h2>Seguimiento</h2>
-      <p class="muted">Ingresa tu número de guía y te llevaremos a nuestra plataforma de tracking.</p>
-      <div class="row">
-        <input id="tracking-code" placeholder="Ej: PV12345">
-        <button id="btn-track" class="btn alt">Rastrear</button>
-      </div>
-      <p class="muted" style="margin-top:8px">Se abrirá en una pestaña segura.</p>
-    </div>
-  </section>
-
-  <!-- Nosotros (3 tarjetas) -->
-  <section id="nosotros" class="section">
-    <div class="wrap grid-3">
-      <div class="card">
-        <h3>Nuestra historia</h3>
-        <p>Somos una empresa familiar. En Pura Vida Envíos ayudamos a que tus compras internacionales lleguen a Costa Rica sin estrés y con trato cercano.</p>
-      </div>
-      <div class="card">
-        <h3>Cómo funciona</h3>
-        <p>Compra en línea y envía a nuestra dirección. Nosotros recibimos, consolidamos y gestionamos el envío a Costa Rica.</p>
-      </div>
-      <div class="card">
-        <h3>Cobertura</h3>
-        <p>Recibimos desde EE.UU., Europa, Asia y Colombia con opciones aéreas y marítimas según tu necesidad.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonios -->
-  <section id="testimonios" class="section">
-    <div class="wrap">
-      <h2>Lo que dicen nuestros clientes</h2>
-      <div class="testi-box" style="margin-top:14px"><p id="testimonios-slider" class="testi-quote"></p></div>
-    </div>
-  </section>
-
-  <!-- Contacto -->
-  <section id="contacto" class="section">
-    <div class="wrap card">
-      <h2>Contacto</h2>
-      <p><strong>WhatsApp:</strong> +506 7268 3043</p>
-      <p><a href="https://instagram.com/puravida_envios" target="_blank" style="color:#0033A0;">Instagram @puravida_envios</a></p>
-    </div>
-  </section>
-
-  <footer>
-    <div class="wrap foot">
-      <div>© 2025 Pura Vida Envíos</div>
-    </div>
-  </footer>
+  <div class="container">
+    <h2>🔍 Rastrea tu paquete</h2>
+    <input type="text" id="codigoTracking" placeholder="Ingresa tu código de tracking...">
+    <button onclick="buscarTracking()">Buscar</button>
+    <div id="resultado"></div>
+  </div>
 
   <script>
-    /* ===== Testimonios ===== */
-    const testimonios = [
-      `"El servicio de ustedes es buenísimo" – Adri Gutiérrez, Heredia`,
-      `"Se los agradezco mucho, siempre me han dado un muy buen servicio" – Mari Barrientos, San José`,
-      `"Muchas gracias 🙌🏽 siempre súper agradecida por el buen servicio" – Amy Rishmond, San José`,
-      `"Me llegó todo súper rápido, excelentes precios" – Alicia, Los Chiles`,
-      `"Siempre llegan a tiempo y son muy seguros" – María Luján, Puntarenas`
+    const datosTracking = [
+      {
+        tracking: "ABC123",
+        cliente: "Juan Pérez",
+        estado: "Entregado en Costa Rica",
+        historial: [
+          "Recibido en Miami - 25 Jul",
+          "En tránsito a Costa Rica - 26 Jul",
+          "Entregado - 30 Jul"
+        ]
+      },
+      {
+        tracking: "XYZ789",
+        cliente: "Laura Vargas",
+        estado: "En tránsito",
+        historial: [
+          "Recibido en Miami - 28 Jul",
+          "En tránsito a Costa Rica - 29 Jul"
+        ]
+      }
     ];
-    let t = 0; const slider = document.getElementById('testimonios-slider');
-    function showT(){ slider.textContent = testimonios[t]; t = (t+1)%testimonios.length; }
-    showT(); setInterval(showT, 4000);
 
-    /* ===== Cotizador ===== */
-    const origen = document.getElementById('origen');
-    const tipoRadios = document.querySelectorAll('input[name="tipo"]');
-    const peso = document.getElementById('peso');
-    const unidad = document.getElementById('unidad');
-    const pesoConv = document.getElementById('peso-convert');
-    const dimBlock = document.getElementById('dim-block');
-    const largo = document.getElementById('largo');
-    const ancho = document.getElementById('ancho');
-    const alto = document.getElementById('alto');
-    const precio = document.getElementById('precio');
-    const detalle = document.getElementById('detalle');
-    const consolidacion = document.getElementById('consolidacion');
-
-    const KG_TO_LB = 2.20462, CM3_TO_FT3 = 1/28316.8, IN3_TO_FT3 = 1/1728;
-
-    function tipo(){ for (const r of tipoRadios){ if(r.checked) return r.value; } return 'aereo'; }
-
-    function updateUI(){
-      // Colombia solo aéreo
-      if (origen.value==='colombia'){
-        document.querySelector('input[value="maritimo"]').disabled = true;
-        if (tipo()==='maritimo') document.querySelector('input[value="aereo"]').checked = true;
+    function buscarTracking() {
+      const input = document.getElementById("codigoTracking").value.trim();
+      const resultado = document.getElementById("resultado");
+      resultado.innerHTML = "";
+      const encontrado = datosTracking.find(pkg => pkg.tracking.toUpperCase() === input.toUpperCase());
+      if (encontrado) {
+        resultado.innerHTML = `
+          <h3>Estado: ${encontrado.estado}</h3>
+          <p><strong>Cliente:</strong> ${encontrado.cliente}</p>
+          <p><strong>Historial:</strong></p>
+          <ul>
+            ${encontrado.historial.map(item => `<li class="historial-item">${item}</li>`).join('')}
+          </ul>
+        `;
       } else {
-        document.querySelector('input[value="maritimo"]').disabled = false;
+        resultado.innerHTML = `<p>No se encontró ningún paquete con ese código.</p>`;
       }
-      dimBlock.style.display = (tipo()==='maritimo') ? 'block' : 'none';
-      calc();
     }
-
-    function round2(n){ return Math.round((n+Number.EPSILON)*100)/100; }
-
-    function calc(){
-      const o = origen.value, tpo = tipo();
-      const p = parseFloat(peso.value||0);
-      const up = unidad.value;
-      let total=0, txt='', conv='';
-
-      if (tpo==='aereo'){
-        if (o==='colombia'){
-          const kg = up==='kg'? p : p/KG_TO_LB;
-          total = kg * 16;
-          txt = `Aéreo desde Colombia: ${round2(kg)} kg × $16`;
-          conv = (up==='lb' && p)? `${round2(kg)} kg` : (up==='kg' && p)? `${round2(kg*KG_TO_LB)} lb` : '';
-          consolidacion.style.display = 'none';
-        } else {
-          const lb = up==='lb'? p : p*KG_TO_LB;
-          total = lb * 7.5; // mínimo 1 lb se comunica abajo
-          txt = `Aéreo EE.UU./Europa/Asia: ${round2(lb)} lb × $7.5`;
-          conv = (up==='kg' && p)? `${round2(lb)} lb` : (up==='lb' && p)? `${round2(lb/KG_TO_LB)} kg` : '';
-          consolidacion.style.display = 'block';
-        }
-      } else {
-        // Marítimo: $25/ft³
-        const l = parseFloat(largo.value||0);
-        const a = parseFloat(ancho.value||0);
-        const h = parseFloat(alto.value||0);
-        const udim = document.querySelector('input[name="udim"]:checked').value;
-        let ft3 = 0;
-        if (l && a && h){
-          ft3 = (udim==='cm') ? l*a*h*CM3_TO_FT3 : l*a*h*IN3_TO_FT3;
-        }
-        total = ft3 * 25;
-        txt = `Marítimo (EE.UU./otros): ${round2(ft3)} ft³ × $25`;
-        conv = '';
-        consolidacion.style.display = 'none';
-      }
-
-      precio.textContent = '$' + round2(total).toFixed(2);
-      detalle.textContent = txt || 'Ingresa datos para ver el cálculo.';
-      pesoConv.textContent = conv;
-    }
-
-    [origen, peso, unidad, largo, ancho, alto].forEach(el=>el.addEventListener('input', calc));
-    tipoRadios.forEach(r=>r.addEventListener('change', updateUI));
-    updateUI();
-
-    /* ===== WhatsApp ===== */
-    document.getElementById('btn-whatsapp').addEventListener('click',()=>{
-      // Validación simple
-      if (tipo()==='aereo' && !peso.value){ alert('Ingresa el peso para cotizar.'); return; }
-      if (tipo()==='maritimo' && (!largo.value || !ancho.value || !alto.value)){ alert('Ingresa largo, ancho y alto para marítimo.'); return; }
-
-      const msg = `Hola, quiero una cotización.\n${detalle.textContent}\nEstimado: ${precio.textContent}`;
-      window.open(`https://wa.me/50672683043?text=${encodeURIComponent(msg)}`,'_blank');
-    });
-
-    /* ===== Tracking ===== */
-    document.getElementById('btn-track').addEventListener('click',()=>{
-      const code = document.getElementById('tracking-code').value.trim();
-      if(!code){ alert('Ingresa tu número de guía'); return; }
-      // Abre tu panel de tracking externo (no mostramos su marca en nuestra web)
-      window.open('https://clientes.cargatica.com/package/in-warehouse','_blank');
-      // Más pro (opcional, futuro): proxy con Netlify/Cloudflare para usar /tracking en tu dominio.
-    });
   </script>
 </body>
 </html>
