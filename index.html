@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pura Vida Envíos</title>
   <style>
     body {
@@ -13,17 +13,26 @@
       background-size: cover;
       color: #fff;
     }
-
     header {
       background-color: rgba(0, 51, 160, 0.9);
       padding: 1rem;
       text-align: center;
     }
-
     header img {
       height: 70px;
     }
-
+    nav {
+      background-color: rgba(0, 51, 160, 0.8);
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
     .container {
       max-width: 800px;
       margin: auto;
@@ -32,12 +41,10 @@
       border-radius: 12px;
       margin-top: 2rem;
     }
-
     h2 {
       text-align: center;
       margin-bottom: 1rem;
     }
-
     input[type="text"] {
       width: 100%;
       padding: 10px;
@@ -45,7 +52,6 @@
       border-radius: 8px;
       border: none;
     }
-
     button {
       padding: 10px 20px;
       background-color: #ff0000;
@@ -54,79 +60,65 @@
       color: white;
       cursor: pointer;
     }
-
     #resultado {
       margin-top: 1.5rem;
-    }
-
-    .historial-item {
-      margin-left: 1rem;
-    }
-
-    .footer {
-      margin-top: 4rem;
-      text-align: center;
-      font-size: 0.9rem;
-      opacity: 0.6;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <img src="Logo%202.jpeg" alt="Logo Pura Vida Envíos" />
+    <img src="Logo%202.jpeg" alt="Logo Pura Vida Envíos">
     <h1>Pura Vida Envíos</h1>
   </header>
 
-  <div class="container">
+  <!-- Barra de navegación -->
+  <nav>
+    <a href="#seguimiento">Seguimiento</a>
+    <a href="https://wa.me/50672683043" target="_blank">WhatsApp</a>
+    <a href="https://www.instagram.com/puravida_envios" target="_blank">Instagram</a>
+  </nav>
+
+  <!-- Sección de seguimiento con ID -->
+  <div class="container" id="seguimiento">
     <h2>🔍 Rastrea tu paquete</h2>
-    <input type="text" id="codigoTracking" placeholder="Ingresa tu código de tracking..." />
+    <input type="text" id="codigoTracking" placeholder="Ingresa tu código de tracking...">
     <button onclick="buscarTracking()">Buscar</button>
     <div id="resultado"></div>
   </div>
 
-  <div class="footer">
-    Consolidamos tus paquetes a partir de 1 libra 📦
-  </div>
-
   <script>
-    async function buscarTracking() {
-      const codigo = document.getElementById("codigoTracking").value.trim().toUpperCase();
+    const datosTracking = [
+      {
+        tracking: "ABC123",
+        cliente: "Juan Pérez",
+        peso: "2.5 lb",
+        estado: "Entregado en Costa Rica"
+      },
+      {
+        tracking: "XYZ789",
+        cliente: "Laura Vargas",
+        peso: "1.2 lb",
+        estado: "En tránsito"
+      }
+    ];
+
+    function buscarTracking() {
+      const input = document.getElementById("codigoTracking").value.trim();
       const resultado = document.getElementById("resultado");
-      resultado.innerHTML = "Buscando...";
-
-      try {
-        const sheetID = "1CUcT4W0wZGzwo-EvjmH8jlP7zn-5bfvEPspqzgKax54";
-        const sheetName = "Hoja 1"; // Cambia si usas otro nombre de pestaña
-        const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
-
-        const res = await fetch(url);
-        const text = await res.text();
-        const json = JSON.parse(text.substr(47).slice(0, -2));
-        const rows = json.table.rows;
-
-        const datos = rows.map(r => ({
-          tracking: r.c[0]?.v?.toString().toUpperCase() || "",
-          cliente: r.c[1]?.v || "",
-          estado: r.c[2]?.v || "",
-          peso: r.c[3]?.v || ""
-        }));
-
-        const paquete = datos.find(d => d.tracking === codigo);
-
-        if (paquete) {
-          resultado.innerHTML = `
-            <h3>Estado: ${paquete.estado}</h3>
-            <p><strong>Cliente:</strong> ${paquete.cliente}</p>
-            <p><strong>Peso:</strong> ${paquete.peso} lb</p>
-          `;
-        } else {
-          resultado.innerHTML = `<p>No se encontró ningún paquete con ese código.</p>`;
-        }
-      } catch (error) {
-        console.error("Error al buscar:", error);
-        resultado.innerHTML = `<p>Error al conectar con la base de datos.</p>`;
+      resultado.innerHTML = "";
+      const encontrado = datosTracking.find(pkg => pkg.tracking.toUpperCase() === input.toUpperCase());
+      if (encontrado) {
+        resultado.innerHTML = `
+          <h3>Estado: ${encontrado.estado}</h3>
+          <p><strong>Cliente:</strong> ${encontrado.cliente}</p>
+          <p><strong>Peso:</strong> ${encontrado.peso}</p>
+        `;
+      } else {
+        resultado.innerHTML = `<p>No se encontró ningún paquete con ese código.</p>`;
       }
     }
   </script>
+
 </body>
 </html>
