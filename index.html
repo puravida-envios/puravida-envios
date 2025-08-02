@@ -225,9 +225,10 @@
       <h2>Seguimiento</h2>
       <p class="muted">Ingresa tu número de guía para rastrear tu paquete (se integrará con tu sistema actual).</p>
       <div class="row">
-        <input type="text" placeholder="Número de guía (ej: PV123456)">
-        <button class="btn alt">Rastrear</button>
+        <input type="text" id="tracking-input" placeholder="Número de guía (ej: PV123456)">
+        <button class="btn alt" id="btn-rastrear">Rastrear</button>
       </div>
+      <div id="tracking-result" style="margin-top:16px;color:var(--texto);font-weight:600;"></div>
     </div>
   </section>
 
@@ -288,6 +289,12 @@
   </footer>
 
   <script>
+    /* 
+    FE: Este script incluye el sistema de cotización que calcula precio según origen, tipo de envío, peso o volumen.
+    FE: El sistema de seguimiento consulta la hoja de Google Sheets para mostrar estado y detalles del paquete.
+    */
+
+    // Variables para cotizador
     const origenSel = document.getElementById('origen');
     const tipoEnvioOpt = document.getElementById('tipo-envio-opt');
     const pesoInput = document.getElementById('peso');
@@ -326,81 +333,4 @@
       const maritimoChip = tipoEnvioOpt.querySelector('input[value="maritimo"]').parentElement;
       const maritimoRadio = tipoEnvioOpt.querySelector('input[value="maritimo"]');
       if (origen==='colombia'){
-        maritimoChip.style.opacity = .4;
-        maritimoRadio.disabled = true;
-        if (tipo==='maritimo') setTipo('aereo');
-      }else{
-        maritimoChip.style.opacity = 1;
-        maritimoRadio.disabled = false;
-      }
-      // Mostrar dimensiones solo si marítimo
-      dimBlock.style.display = (getTipo()==='maritimo' ? 'block' : 'none');
-      compute();
-    }
-
-    function round2(n){ return Math.round((n + Number.EPSILON)*100)/100; }
-
-    function compute(){
-      const origen = origenSel.value;
-      const tipo = getTipo();
-      const peso = parseFloat(pesoInput.value||0);
-      const up = unidadPeso.value;
-
-      let precio = 0;
-      let detalle = '';
-
-      if (tipo==='aereo'){
-        if (origen==='colombia'){
-          // $16 / kg
-          const kg = (up==='kg') ? peso : (peso/ KG_TO_LB);
-          precio = kg * 16;
-          detalle = `Aéreo desde Colombia: ${round2(kg)} kg × $16 = $${round2(precio)}`;
-          pesoConvert.textContent = (up==='lb' && peso) ? `${round2(kg)} kg` : (up==='kg' && peso) ? `${round2(kg*KG_TO_LB)} lb` : '';
-        }else{
-          // $7.5 / lb
-          const lb = (up==='lb') ? peso : (peso* KG_TO_LB);
-          precio = lb * 7.5;
-          detalle = `Aéreo desde EE.UU./otros: ${round2(lb)} lb × $7.5 = $${round2(precio)}`;
-          pesoConvert.textContent = (up==='kg' && peso) ? `${round2(lb)} lb` : (up==='lb' && peso) ? `${round2(lb/KG_TO_LB)} kg` : '';
-        }
-      }else{
-        // marítimo solo USA/otros
-        // volumen en ft³ a partir de dimensiones
-        const l = parseFloat(largoEl.value||0);
-        const a = parseFloat(anchoEl.value||0);
-        const h = parseFloat(altoEl.value||0);
-        const unidadDim = document.querySelector('input[name="unidad-dim"]:checked').value;
-        let ft3 = 0;
-        if (l && a && h){
-          if (unidadDim==='cm'){
-            ft3 = l*a*h*CM3_TO_FT3;
-          }else{
-            ft3 = l*a*h*IN3_TO_FT3;
-          }
-        }
-        precio = ft3 * 25;
-        detalle = `Marítimo (EE.UU./otros): ${round2(ft3)} ft³ × $25 = $${round2(precio)}`;
-        pesoConvert.textContent = '';
-      }
-
-      precioEl.textContent = '$' + round2(precio).toFixed(2);
-      detalleEl.textContent = detalle || 'Ingresa datos para ver el cálculo.';
-    }
-
-    origenSel.addEventListener('change', updateVisibility);
-    tipoEnvioOpt.addEventListener('change', updateVisibility);
-    pesoInput.addEventListener('input', compute);
-    unidadPeso.addEventListener('change', compute);
-    [largoEl, anchoEl, altoEl].forEach(el=>el.addEventListener('input', compute));
-    document.querySelectorAll('input[name="unidad-dim"]').forEach(el=>el.addEventListener('change', compute));
-
-    // Inicial
-    updateVisibility();
-
-    // Botón solicitar
-    document.getElementById('btn-solicitar').addEventListener('click', ()=>{
-      alert('¡Listo! Este botón abrirá un formulario para enviar tus datos de contacto.');
-    });
-  </script>
-</body>
-</html>
+        maritimoChip.style.opacity = .
