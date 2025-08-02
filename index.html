@@ -1,214 +1,169 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pura Vida Envíos - Cotizaciones y Servicios</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-  body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background: url('https://i.imgur.com/LnYmzRr.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  header {
-    background: rgba(0, 51, 102, 0.85);
-    width: 100%;
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  header img {
-    height: 50px;
-  }
-  header h1 {
-    font-weight: 700;
-    font-size: 1.8rem;
-    margin: 0;
-  }
-  main {
-    max-width: 900px;
-    width: 100%;
-    background: rgba(0, 51, 102, 0.8);
-    padding: 25px 30px;
-    border-radius: 10px;
-    margin: 30px 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.7);
-  }
-  section {
-    margin-bottom: 40px;
-  }
-  h2 {
-    border-bottom: 2px solid #fff;
-    padding-bottom: 8px;
-    margin-bottom: 15px;
-  }
-  p {
-    line-height: 1.5;
-  }
-  .btn-whatsapp {
-    display: inline-block;
-    background: #25D366;
-    color: white;
-    font-weight: 600;
-    padding: 12px 25px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: background 0.3s;
-  }
-  .btn-whatsapp:hover {
-    background: #128C7E;
-  }
-  form {
-    background: #003366;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: inset 0 0 10px #001f4d;
-  }
-  form label {
-    display: block;
-    margin: 12px 0 6px;
-  }
-  form select, form input[type="number"] {
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 5px;
-    border: none;
-    font-size: 1rem;
-  }
-  form input[type="checkbox"] {
-    margin-right: 8px;
-  }
-  form button {
-    margin-top: 15px;
-    background: #ffbb33;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: background 0.3s;
-  }
-  form button:hover {
-    background: #ffa500;
-  }
-  #resultado {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    background: #004080;
-    padding: 15px;
-    border-radius: 6px;
-    min-height: 50px;
-  }
-  @media (max-width: 600px) {
-    main {
-      margin: 20px 5px;
-      padding: 20px;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pura Vida Envíos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #ffffff, #e6f0ff);
+      margin: 0;
+      padding: 0;
+      color: #222;
     }
-  }
-</style>
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .section {
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #003366;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .tracking-result {
+      margin-top: 15px;
+      background-color: #f0f8ff;
+      padding: 15px;
+      border: 1px solid #ccc;
+    }
+    footer {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+    .testimonials {
+      background: #f7f7f7;
+      padding: 20px;
+      margin-top: 20px;
+      border-left: 5px solid #003366;
+    }
+  </style>
 </head>
 <body>
+
 <header>
-  <img src="https://i.imgur.com/Rqkq6Js.png" alt="Logo Pura Vida Envíos" />
   <h1>Pura Vida Envíos</h1>
+  <p>Tu puente entre el mundo y Costa Rica 🌍📦🇨🇷</p>
 </header>
 
-<main>
-  <section class="about">
-    <h2>Nuestra Historia</h2>
-    <p>
-      En Pura Vida Envíos ofrecemos servicios de paquetería y logística para envíos desde EE.UU., Europa, Asia y Colombia hacia Costa Rica. Nuestro compromiso es asegurar que tus paquetes lleguen rápido y seguros.
-    </p>
-  </section>
+<div class="section">
+  <h2>¿Quiénes somos?</h2>
+  <p>En Pura Vida Envíos nos encargamos de recibir tus paquetes desde EE.UU., Europa, Asia y Colombia para llevarlos hasta la puerta de tu casa en Costa Rica. Ya sea para ti o tu negocio, hacemos que importar sea fácil, rápido y seguro.</p>
+</div>
 
-  <section class="quotation">
-    <h2>Cotiza tu envío</h2>
-    <form id="formCotizacion">
-      <label for="origen">Origen / Región:</label>
-      <select id="origen" name="origen" required>
-        <option value="">Selecciona</option>
-        <option value="USA">Estados Unidos</option>
-        <option value="Europa">Europa</option>
-        <option value="Asia">Asia</option>
-        <option value="Colombia">Colombia</option>
-      </select>
+<div class="section">
+  <h2>Calculá tu envío</h2>
+  <label>Origen:</label>
+  <select id="origen">
+    <option value="usa">EE.UU., Europa o Asia</option>
+    <option value="colombia">Colombia</option>
+  </select>
 
-      <label>
-        <input type="checkbox" id="maritimo" name="maritimo" />
-        ¿Servicio marítimo? (solo para Colombia)
-      </label>
+  <label>Tipo de envío:</label>
+  <select id="tipo">
+    <option value="aereo">Aéreo</option>
+    <option value="maritimo">Marítimo</option>
+  </select>
 
-      <label for="peso">Peso del paquete (libras):</label>
-      <input type="number" id="peso" name="peso" min="0.1" step="0.1" required />
+  <label>Peso (lbs):</label>
+  <input type="number" id="peso" placeholder="Ej: 2.5" />
 
-      <label for="volumen">Volumen (pies cúbicos):</label>
-      <input type="number" id="volumen" name="volumen" min="0" step="0.01" required />
+  <button onclick="calcular()">Calcular precio</button>
+  <p id="resultado"></p>
+</div>
 
-      <button type="submit">Calcular Cotización</button>
-    </form>
-    <div id="resultado"></div>
-  </section>
+<div class="section">
+  <h2>Rastrear paquete</h2>
+  <input type="text" id="trackingInput" placeholder="Ingrese número de guía" />
+  <button onclick="buscarTracking()">Buscar</button>
+  <div id="trackingResult" class="tracking-result"></div>
+</div>
 
-  <section class="contacto">
-    <h2>¿Quieres cotizar directo?</h2>
-    <p>Envianos un mensaje por WhatsApp y te ayudamos:</p>
-    <a class="btn-whatsapp" href="https://wa.me/50672683043?text=Hola%20Pura%20Vida%20Envíos,%20quiero%20cotizar%20mi%20envío" target="_blank" rel="noopener noreferrer">Cotizar por WhatsApp</a>
-  </section>
-</main>
+<div class="section testimonials">
+  <h2>Lo que dicen nuestros clientes</h2>
+  <p>"Increíble servicio, siempre me llega todo a tiempo y en buen estado." — María G.</p>
+  <p>"Gracias por facilitarme traer productos desde USA, son súper confiables." — Luis R.</p>
+</div>
+
+<div class="section">
+  <h2>¿Necesitás ayuda?</h2>
+  <p>Escribinos directamente por <a href="https://wa.me/50672683043" target="_blank">WhatsApp</a></p>
+</div>
+
+<footer>
+  <p>&copy; 2025 Pura Vida Envíos</p>
+</footer>
 
 <script>
-  const form = document.getElementById('formCotizacion');
-  const resultado = document.getElementById('resultado');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const origen = form.origen.value;
-    const maritimo = form.maritimo.checked;
-    const peso = parseFloat(form.peso.value);
-    const volumen = parseFloat(form.volumen.value);
-
-    if (!origen) {
-      resultado.textContent = 'Por favor selecciona una región.';
-      return;
-    }
-    if (peso <= 0 || volumen < 0) {
-      resultado.textContent = 'Por favor ingresa valores válidos de peso y volumen.';
-      return;
-    }
-
+  function calcular() {
+    const origen = document.getElementById("origen").value;
+    const tipo = document.getElementById("tipo").value;
+    const peso = parseFloat(document.getElementById("peso").value);
     let precio = 0;
 
-    if (origen === 'Colombia') {
-      if (maritimo) {
-        // Precio marítimo Colombia: $25 por pie cúbico, sin peso
-        precio = volumen * 25;
-      } else {
-        // Precio aéreo Colombia: $10 por libra + $5 por pie cúbico
-        precio = peso * 10 + volumen * 5;
-      }
+    if (isNaN(peso) || peso <= 0) {
+      document.getElementById("resultado").innerText = "Por favor ingresá un peso válido.";
+      return;
+    }
+
+    if (origen === "colombia") {
+      if (tipo === "aereo") precio = peso * 8;
+      else precio = peso * 5;
     } else {
-      // Para USA, Europa y Asia aéreo
-      let tarifaPeso = 0;
-      switch(origen) {
-        case 'USA':
-          tarifaPeso = 5;  // $5 por libra
-          break;
-        case 'Europa':
-          tarifaPeso = 7;  // $7 por libra
-          break;
-        case 'Asia':
-          tarifaPeso = 8;  // $8 por libra
-          break;
+      if (tipo === "aereo") precio = peso * 10;
+      else precio = peso * 6;
+    }
+
+    document.getElementById("resultado").innerText = `Tu envío costaría aproximadamente: $${precio.toFixed(2)} USD`;
+  }
+
+  async function buscarTracking() {
+    const input = document.getElementById("trackingInput").value.trim();
+    const resultDiv = document.getElementById("trackingResult");
+    resultDiv.innerHTML = "Buscando...";
+
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRhS6Dnh3lb4fmBU-meYbG7lP1Qpg6-5HvsWqI06RdkHTFVkpx2u711X-v6encM-kLX53Wtrl5RSQS1/pub?output=csv";
+
+    try {
+      const response = await fetch(csvUrl);
+      const text = await response.text();
+      const rows = text.split("\n").map(r => r.split(","));
+      const headers = rows[0];
+      const trackingIndex = headers.indexOf("Tracking");
+
+      const match = rows.find((r, i) => i !== 0 && r[trackingIndex].trim() === input);
+
+      if (match) {
+        const cliente = match[headers.indexOf("Cliente")];
+        const estado = match[headers.indexOf("Estado")];
+        const peso = match[headers.indexOf("Peso")];
+        resultDiv.innerHTML = `
+          <strong>Cliente:</strong> ${cliente}<br>
+          <strong>Estado:</strong> ${estado}<br>
+          <strong>Peso:</strong> ${peso} lbs
+        `;
+      } else {
+        resultDiv.innerHTML = "No se encontró ese número de guía.";
       }
-      precio = peso * tarifaPeso + volumen * 4; // $4 por pie cúbico
+    } catch (e) {
+      resultDiv.innerHTML = "Error al consultar los datos. Intentalo de nuevo más tarde.";
+    }
+  }
+</script>
+
+</body>
+</html>
