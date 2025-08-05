@@ -105,23 +105,13 @@
     .kbd{font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;background:#f3f4f6;border:1px solid #e5e7eb;border-bottom-width:2px;padding:2px 6px;border-radius:6px;font-size:12px}
 
     /* Testimonios */
-    .testi-quote{ font-size:20px; line-height:1.6; color:#111827; font-style:italic; margin:0; }
+    .testi-quote{
+      font-size:20px; line-height:1.6; color:#111827; font-style:italic; margin:0;
+    }
     .testi-box{
       border-left:6px solid var(--azul);
       background:#fff; border:1px solid var(--borde); border-radius:16px; padding:22px; box-shadow:var(--sombra);
     }
-
-    /* Modal WhatsApp */
-    .modal{
-      position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.35);
-    }
-    .modal.show{ display:grid; }
-    .modal-card{
-      width:min(520px, 92vw); background:#fff; border:1px solid var(--borde); border-radius:18px; box-shadow:var(--sombra);
-      padding:18px;
-    }
-    .modal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
-    .xbtn{ background:#fff; border:1px solid var(--borde); border-radius:10px; padding:6px 10px; cursor:pointer; }
   </style>
 </head>
 <body>
@@ -249,21 +239,7 @@
           <div class="muted">Resultado estimado</div>
           <div class="price" id="precio">$0.00</div>
           <div id="detalle" class="muted"></div>
-
-          <!-- Mensaje de consolidación: solo USA/Europa/Asia aéreo -->
-          <div id="consolidacion" style="display:none; margin-top:8px;">
-            <p style="color:#0033A0; font-weight:700; margin:6px 0; font-size:16px;">
-              ¡Consolidamos tus paquetes a partir de 1 libra!
-            </p>
-            <p class="small">
-              El mínimo a cobrar es 1 libra en envíos desde EE.UU., Europa y Asia.
-              Sumamos todos tus paquetes para que pagues lo justo.
-            </p>
-          </div>
-
-          <div class="disclaimer">
-            Los montos mostrados son estimados. Tarifas pueden variar por revisión, seguros u otros factores.
-          </div>
+          <div class="disclaimer">Los montos mostrados son estimados. Tarifas pueden variar por revisión, seguros u otros factores.</div>
           <div style="margin-top:14px">
             <button class="btn" id="btn-solicitar">Solicitar cotización personalizada</button>
           </div>
@@ -287,7 +263,7 @@
     <div class="wrap grid-3">
       <div class="card">
         <h3>Nuestra historia</h3>
-        <p>Somos Beto y Raquel. En Pura Vida Envíos ayudamos a que tus compras internacionales lleguen a Costa Rica sin estrés y con trato cercano.</p>
+        <p>Somos una empresa familiar. En Pura Vida Envíos ayudamos a que tus compras internacionales lleguen a Costa Rica sin estrés y con trato cercano.</p>
       </div>
       <div class="card">
         <h3>Cómo funciona</h3>
@@ -350,33 +326,6 @@
     </div>
   </footer>
 
-  <!-- Modal para WhatsApp -->
-  <div class="modal" id="wapp-modal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="wapp-title">
-      <div class="modal-head">
-        <h3 id="wapp-title" style="margin:0">Enviar cotización por WhatsApp</h3>
-        <button class="xbtn" id="wapp-close" aria-label="Cerrar">✕</button>
-      </div>
-      <p class="muted" style="margin-top:0">Déjanos tus datos y enviaremos tu cotización al WhatsApp de Pura Vida Envíos.</p>
-      <form id="wapp-form">
-        <div class="row">
-          <div>
-            <label for="wapp-nombre">Nombre</label>
-            <input id="wapp-nombre" type="text" placeholder="Tu nombre" required>
-          </div>
-          <div>
-            <label for="wapp-email">Email</label>
-            <input id="wapp-email" type="email" placeholder="tu@email.com" required>
-          </div>
-        </div>
-        <div style="margin-top:12px; display:flex; gap:10px; justify-content:flex-end">
-          <button type="button" class="xbtn" id="wapp-cancel">Cancelar</button>
-          <button type="submit" class="btn">Enviar a WhatsApp</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
   <script>
     /* ====== LÓGICA DEL COTIZADOR ====== */
     const origenSel = document.getElementById('origen');
@@ -390,7 +339,6 @@
     const largoEl = document.getElementById('largo');
     const anchoEl = document.getElementById('ancho');
     const altoEl = document.getElementById('alto');
-    const consolidacionEl = document.getElementById('consolidacion');
 
     const KG_TO_LB = 2.20462;
     const CM3_TO_FT3 = 1/28316.8;
@@ -428,8 +376,7 @@
       }
       // Mostrar dimensiones solo si marítimo
       dimBlock.style.display = (getTipo()==='maritimo' ? 'block' : 'none');
-
-      compute(); // recalcular
+      compute();
     }
 
     function round2(n){ return Math.round((n + Number.EPSILON)*100)/100; }
@@ -451,10 +398,10 @@
           detalle = `Aéreo desde Colombia: ${round2(kg)} kg × $16 = $${round2(precio)}`;
           pesoConvert.textContent = (up==='lb' && peso) ? `${round2(kg)} kg` : (up==='kg' && peso) ? `${round2(kg*KG_TO_LB)} lb` : '';
         }else{
-          // $7.5 / lb (min 1 lb se aclara con mensaje)
+          // $7.5 / lb
           const lb = (up==='lb') ? peso : (peso* KG_TO_LB);
           precio = lb * 7.5;
-          detalle = `Aéreo desde EE.UU./Europa/Asia: ${round2(lb)} lb × $7.5 = $${round2(precio)}`;
+          detalle = `Aéreo desde EE.UU./otros: ${round2(lb)} lb × $7.5 = $${round2(precio)}`;
           pesoConvert.textContent = (up==='kg' && peso) ? `${round2(lb)} lb` : (up==='lb' && peso) ? `${round2(lb/KG_TO_LB)} kg` : '';
         }
       }else{
@@ -478,13 +425,6 @@
 
       precioEl.textContent = '$' + round2(precio).toFixed(2);
       detalleEl.textContent = detalle || 'Ingresa datos para ver el cálculo.';
-
-      // Mostrar mensaje de consolidación solo para USA/Europa/Asia aéreo
-      if (origen === 'usa' && tipo === 'aereo') {
-        consolidacionEl.style.display = 'block';
-      } else {
-        consolidacionEl.style.display = 'none';
-      }
     }
 
     origenSel.addEventListener('change', updateVisibility);
@@ -494,6 +434,11 @@
     [largoEl, anchoEl, altoEl].forEach(el=>el.addEventListener('input', compute));
     document.querySelectorAll('input[name="unidad-dim"]').forEach(el=>el.addEventListener('change', compute));
     updateVisibility();
+
+    // Botón solicitar (luego lo conectamos a WhatsApp/correo)
+    document.getElementById('btn-solicitar').addEventListener('click', ()=>{
+      alert('¡Listo! Este botón abrirá un formulario para enviar tus datos de contacto.');
+    });
 
     /* ====== TESTIMONIOS ROTATIVOS (parte baja) ====== */
     const testimonios = [
@@ -511,87 +456,6 @@
     }
     mostrarTestimonio();
     setInterval(mostrarTestimonio, 4000); // cambia cada 4s
-
-    /* ====== WHATSAPP ====== */
-    const WAPP_NUMBER = '50672683043'; // CR +506
-    const wappBtn = document.getElementById('btn-solicitar');
-    const wappModal = document.getElementById('wapp-modal');
-    const wappClose = document.getElementById('wapp-close');
-    const wappCancel = document.getElementById('wapp-cancel');
-    const wappForm = document.getElementById('wapp-form');
-    const wappNombre = document.getElementById('wapp-nombre');
-    const wappEmail = document.getElementById('wapp-email');
-
-    function abrirModal(){
-      // Validar que haya datos mínimos para cotización
-      const tipo = getTipo();
-      const origen = origenSel.value;
-      const peso = parseFloat(pesoInput.value||0);
-      if (tipo === 'aereo') {
-        if (!peso || peso <= 0) {
-          alert('Por favor ingresa el peso para calcular tu cotización.');
-          return;
-        }
-      } else { // marítimo
-        const l = parseFloat(largoEl.value||0);
-        const a = parseFloat(anchoEl.value||0);
-        const h = parseFloat(altoEl.value||0);
-        if (!l || !a || !h) {
-          alert('Por favor ingresa largo, ancho y alto para calcular tu cotización marítima.');
-          return;
-        }
-      }
-      wappModal.classList.add('show');
-      wappModal.setAttribute('aria-hidden','false');
-      wappNombre.focus();
-    }
-
-    function cerrarModal(){
-      wappModal.classList.remove('show');
-      wappModal.setAttribute('aria-hidden','true');
-    }
-
-    wappBtn.addEventListener('click', abrirModal);
-    wappClose.addEventListener('click', cerrarModal);
-    wappCancel.addEventListener('click', cerrarModal);
-    wappModal.addEventListener('click', (e)=>{ if(e.target===wappModal) cerrarModal(); });
-
-    wappForm.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const nombre = wappNombre.value.trim();
-      const email = wappEmail.value.trim();
-      const origenTxt = (origenSel.value==='colombia') ? 'Colombia' : 'EE.UU./Europa/Asia';
-      const tipo = getTipo();
-
-      // Tomar datos de cálculo actuales
-      const precioTxt = precioEl.textContent;
-      const detalleTxt = detalleEl.textContent;
-      const pesoVal = parseFloat(pesoInput.value||0);
-      const unidadP = unidadPeso.value;
-
-      let dimsTxt = '';
-      if (tipo==='maritimo'){
-        const l = parseFloat(largoEl.value||0);
-        const a = parseFloat(anchoEl.value||0);
-        const h = parseFloat(altoEl.value||0);
-        const unidadDim = document.querySelector('input[name="unidad-dim"]:checked').value;
-        dimsTxt = ` | Dimensiones: ${l}×${a}×${h} ${unidadDim}`;
-      }
-
-      const msg =
-`Hola, soy ${nombre}.
-Quiero una cotización:
-• Origen: ${origenTxt}
-• Tipo: ${tipo.toUpperCase()}
-• Peso: ${pesoVal || 0} ${unidadP}${dimsTxt}
-• Estimado: ${precioTxt}
-• Detalle: ${detalleTxt}
-Mi email: ${email}`;
-
-      const url = `https://wa.me/${WAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-      window.open(url, '_blank');
-      cerrarModal();
-    });
   </script>
 </body>
 </html>
