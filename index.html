@@ -282,8 +282,7 @@
       </div>
       <div class="social">
         <span>Síguenos:</span>
-        <a href="https://www.instagram.com/puravida_envios" target="_blank" rel="noopener noreferrer" style="color:#fff">Instagram</a>
-
+        <a href="#" style="color:#fff">Instagram</a>
       </div>
     </div>
   </footer>
@@ -355,14 +354,14 @@
           // $16 / kg
           const kg = (up==='kg') ? peso : (peso/ KG_TO_LB);
           precio = kg * 16;
-          detalle = Aéreo desde Colombia: ${round2(kg)} kg × $16 = $${round2(precio)};
-          pesoConvert.textContent = (up==='lb' && peso) ? ${round2(kg)} kg : (up==='kg' && peso) ? ${round2(kg*KG_TO_LB)} lb : '';
+          detalle = `Aéreo desde Colombia: ${round2(kg)} kg × $16 = $${round2(precio)}`;
+          pesoConvert.textContent = (up==='lb' && peso) ? `${round2(kg)} kg` : (up==='kg' && peso) ? `${round2(kg*KG_TO_LB)} lb` : '';
         }else{
           // $7.5 / lb
           const lb = (up==='lb') ? peso : (peso* KG_TO_LB);
           precio = lb * 7.5;
-          detalle = Aéreo desde EE.UU./otros: ${round2(lb)} lb × $7.5 = $${round2(precio)};
-          pesoConvert.textContent = (up==='kg' && peso) ? ${round2(lb)} lb : (up==='lb' && peso) ? ${round2(lb/KG_TO_LB)} kg : '';
+          detalle = `Aéreo desde EE.UU./otros: ${round2(lb)} lb × $7.5 = $${round2(precio)}`;
+          pesoConvert.textContent = (up==='kg' && peso) ? `${round2(lb)} lb` : (up==='lb' && peso) ? `${round2(lb/KG_TO_LB)} kg` : '';
         }
       }else{
         // marítimo solo USA/otros
@@ -380,7 +379,7 @@
           }
         }
         precio = ft3 * 25;
-        detalle = Marítimo (EE.UU./otros): ${round2(ft3)} ft³ × $25 = $${round2(precio)};
+        detalle = `Marítimo (EE.UU./otros): ${round2(ft3)} ft³ × $25 = $${round2(precio)}`;
         pesoConvert.textContent = '';
       }
 
