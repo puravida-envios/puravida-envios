@@ -453,7 +453,143 @@
     const slider = document.getElementById('testimonios-slider');
     function mostrarTestimonio() {
       slider.textContent = testimonios[tIndex];
-      tIndex = (tIndex + 1) % testimonios.length;
+      tIndex = (tIndex + 1) % testimonios.le<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pura Vida Envíos</title>
+  <style>
+    :root {
+      --azul: #0033A0;
+      --rojo: #CE1126;
+      --blanco: #FFFFFF;
+      --gris: #f5f7fb;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--gris);
+    }
+    header {
+      background-color: var(--blanco);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header img {
+      height: 60px;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: var(--azul);
+      font-weight: bold;
+    }
+    section {
+      padding: 40px;
+    }
+    button {
+      background-color: var(--azul);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+    footer {
+      background-color: var(--azul);
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <img src="Logo 2.jpeg" alt="Pura Vida Envíos Logo">
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#tarifas">Tarifas</a>
+      <a href="#tracking">Rastrear</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- Sección principal -->
+  <section id="inicio" style="text-align:center;">
+    <h1>Bienvenido a Pura Vida Envíos</h1>
+    <p>Envíos rápidos y seguros desde EE.UU., Europa, Asia y Colombia hacia Costa Rica.</p>
+    <a href="https://puravida-envios.github.io/puravida-tracking/" target="_blank">
+      <button>Rastrear Paquete</button>
+    </a>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios">
+    <h2>Nuestros Servicios</h2>
+    <ul>
+      <li>Envíos aéreos y marítimos</li>
+      <li>Compras internacionales</li>
+      <li>Logística para empresas</li>
+      <li>Importaciones desde EE.UU., Europa, Asia y Colombia</li>
+    </ul>
+  </section>
+
+  <!-- Tarifas -->
+  <section id="tarifas">
+    <h2>Tarifas</h2>
+    <p>Consulta nuestras tarifas personalizadas contactándonos por WhatsApp o usando nuestro cotizador.</p>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" style="background-color: #f5f5f5;">
+    <h2>Contáctanos</h2>
+    <form id="formularioContacto" onsubmit="enviarPorWhatsApp(); return false;">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="correo">Correo:</label>
+      <input type="email" id="correo" name="correo" required>
+
+      <label for="mensaje">Mensaje:</label>
+      <textarea id="mensaje" name="mensaje" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <!-- Pie de página -->
+  <footer>
+    <p>&copy; 2025 Pura Vida Envíos - Todos los derechos reservados</p>
+  </footer>
+
+  <!-- Script WhatsApp -->
+  <script>
+    function enviarPorWhatsApp() {
+      const nombre = document.getElementById("nombre").value;
+      const correo = document.getElementById("correo").value;
+      const mensaje = document.getElementById("mensaje").value;
+
+      const texto = `Hola, soy ${nombre}. Mi correo es: ${correo}. Mensaje: ${mensaje}`;
+      const enlace = "https://wa.me/50672683043?text=" + encodeURIComponent(texto);
+
+      window.open(enlace, "_blank");
+    }
+  </script>
+
+</body>
+</html>
+ngth;
     }
     mostrarTestimonio();
     setInterval(mostrarTestimonio, 4000); // cambia cada 4s
